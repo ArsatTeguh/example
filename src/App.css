@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cursor,
+.mask {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.cursor {
+  border: 2px solid white;
+}
+.mask {
+  background: transparent;
+  mix-blend-mode: difference;
+}
+.cursor-hidden {
+  border: none; /* Menyembunyikan border ketika hover aktif */
+}
+
+.img-bg {
+  background-image: url("/bg.avif");
+  background-size: cover; /* Pastikan gambar menutupi seluruh area */
+  background-position: center; /* Pusatkan gambar */
+  background-repeat: no-repeat; /* Jangan ulangi gambar */
+  width: 100%;
+  height: 100%;
+}
+.img-bg::after {
+  content: "";
+  background-color: black;
+  opacity: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-layer {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  z-index: 10;
+}
+.text-overlay {
+  letter-spacing: 0.1em;
+  -webkit-text-stroke: 3px white;
+  color: transparent;
+
+  overflow: hidden;
+}
+.text-overlay span::before {
+  content: attr(data-char);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-110%);
+  color: orangered;
+}
+
+.img-wraper {
+  position: absolute;
+  width: 15vw;
+  height: 15vw;
+  left: -15vw;
+  top: -11vw;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 50%;
+  border: 5px solid orangered;
+  overflow: hidden;
+  visibility: hidden;
+  transform: scale(0.3);
+}
+.img-wraper .img-placeholder img {
+  width: 100%;
+  height: 100%;
+}
+
+.img-placeholder img {
+  object-fit: cover;
+  display: block;
+}
